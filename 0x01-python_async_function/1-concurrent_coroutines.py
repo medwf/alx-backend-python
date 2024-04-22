@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-
+"""
+module for task 1
+"""
 from asyncio import gather
 from typing import List
+
+
 wait_random = __import__('0-basic_async_syntax').wait_random
-
-
-"""
-module for task 1.
-"""
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
