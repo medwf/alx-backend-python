@@ -4,10 +4,10 @@
 function:
     wait_random: an asynchronous coroutine that takes in an integer argument
 """
-import random
+import random, asyncio
 
 
-async def wait_random(max_delay: int = 10):
+async def wait_random(max_delay: int = 10) -> float:
     """
     an asynchronous coroutine that takes in an integer argument
     Args:
@@ -15,4 +15,6 @@ async def wait_random(max_delay: int = 10):
     return:
         random value between 0, max_delay.
     """
-    return random.uniform(0, max_delay)
+    waitInTell = random.uniform(0, max_delay)
+    await asyncio.sleep(waitInTell)
+    return waitInTell
