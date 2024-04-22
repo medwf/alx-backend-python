@@ -4,7 +4,8 @@
 function:
     wait_random: an asynchronous coroutine that takes in an integer argument
 """
-import random, asyncio
+import random
+import asyncio
 
 
 async def wait_random(max_delay: int = 10) -> float:
