@@ -5,7 +5,7 @@ module for test utils
 import unittest
 from typing import Dict
 from unittest.mock import patch, Mock
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 
 
@@ -45,16 +45,24 @@ class TestGetJson(unittest.TestCase):
             self.assertEqual(get_json(test_url), test_payload)
             req_get.assert_called_once_with(test_url)
 
-# class TestMemoize(unittest.TestCase):
-#     """TestMemoize define"""
 
-#     def test_memoize(self):
-#         """test memoize methods"""
-#         class TestClass:
+class TestMemoize(unittest.TestCase):
+    """TestMemoize define"""
 
-#         def a_method(self):
-#             return 42
+    def test_memoize(self):
+        """test memoize methods"""
+        class TestClass:
+            """Doc"""
+            def a_method(self):
+                return 42
 
-#         @memoize
-#         def a_property(self):
-#             return self.a_method()
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method',
+                          return_value=(lambda: 42)) as Rv:
+            test = TestClass()
+            self.assertEqual(test.a_property(), 42)
+            self.assertEqual(test.a_property(), 42)
+            Rv.assert_called_once()
