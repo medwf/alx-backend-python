@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""test client module"""
+"""A module for testing the client module."""
 import unittest
 from unittest.mock import patch, Mock, MagicMock
 from parameterized import parameterized
@@ -8,7 +8,10 @@ from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """TestGithubOrgClient define"""
+    """
+    TestGithubOrgClient define
+        For testing class GithubOrgClient
+    """
 
     @parameterized.expand([
         ('google', {'api': 'google'}),
@@ -16,7 +19,7 @@ class TestGithubOrgClient(unittest.TestCase):
     ])
     @patch('client.get_json')
     def test_org(self, org: str, responce: Dict, moked: MagicMock) -> None:
-        """test client"""
+        """test org methods"""
         moked.return_value = MagicMock(return_value=responce)
         instance = GithubOrgClient(org)
         self.assertEqual(instance.org(), responce)
