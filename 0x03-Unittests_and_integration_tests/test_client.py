@@ -8,11 +8,7 @@ from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """
-    TestGithubOrgClient define
-        For testing class GithubOrgClient
-    """
-
+    """Tests the `GithubOrgClient` class."""
     @parameterized.expand([
         ("google", {'login': "google"}),
         ("abc", {'login': "abc"}),
@@ -20,11 +16,11 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch(
         "client.get_json",
     )
-    def test_org(self, org: str, responce: Dict, moked: MagicMock) -> None:
-        """Tests the org method using Mock and parameterized"""
-        moked.return_value = MagicMock(return_value=responce)
-        instance = GithubOrgClient(org)
-        self.assertEqual(instance.org(), responce)
-        moked.assert_called_once_with(
+    def test_org(self, org: str, resp: Dict, mocked_fxn: MagicMock) -> None:
+        """Tests the `org` method."""
+        mocked_fxn.return_value = MagicMock(return_value=resp)
+        gh_org_client = GithubOrgClient(org)
+        self.assertEqual(gh_org_client.org(), resp)
+        mocked_fxn.assert_called_once_with(
             "https://api.github.com/orgs/{}".format(org)
         )
