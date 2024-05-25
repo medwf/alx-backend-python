@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """A module for testing the client module."""
 import unittest
+from typing import Dict
 from unittest.mock import patch, MagicMock
 from parameterized import parameterized
-from typing import Dict
 from client import GithubOrgClient
 
 
@@ -21,7 +21,7 @@ class TestGithubOrgClient(unittest.TestCase):
         "client.get_json",
     )
     def test_org(self, org: str, responce: Dict, moked: MagicMock) -> None:
-        """test org methods"""
+        """Tests the org method using Mock and parameterized"""
         moked.return_value = MagicMock(return_value=responce)
         instance = GithubOrgClient(org)
         self.assertEqual(instance.org(), responce)
