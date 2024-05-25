@@ -17,7 +17,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ('google', {'api': 'google'}),
         ('abc', {'api': 'abc'}),
     ])
-    @patch('client.get_json')
+    @patch('client.get_json', )
     def test_org(self, org: str, responce: Dict, moked: MagicMock) -> None:
         """test org methods"""
         moked.return_value = MagicMock(return_value=responce)
