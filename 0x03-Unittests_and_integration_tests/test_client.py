@@ -6,6 +6,7 @@ from parameterized import parameterized
 from typing import Dict
 from client import GithubOrgClient
 
+
 class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient define"""
 
@@ -20,4 +21,3 @@ class TestGithubOrgClient(unittest.TestCase):
         instance = GithubOrgClient(org)
         self.assertEqual(instance.org(), responce)
         moked.assert_called_once()
-
