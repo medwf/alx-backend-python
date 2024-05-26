@@ -3,12 +3,7 @@
 """
 import unittest
 from typing import Dict
-from unittest.mock import (
-    MagicMock,
-    Mock,
-    patch,
-    PropertyMock,
-)
+from unittest.mock import MagicMock, Mock, patch, PropertyMock
 from parameterized import parameterized
 
 from client import (
@@ -65,12 +60,9 @@ class TestGithubOrgClient(unittest.TestCase):
             mocked_public_repos_url.return_value = (
                 "https://api.github.com/orgs/google/repos"
             )
+            inst = GithubOrgClient("google")
             self.assertEqual(
-                GithubOrgClient("google").public_repos(),
-                [
-                    "abc",
-                    "defg",
-                ],
+                inst.public_repos(), ["abc", "defg"]
             )
             mocked_public_repos_url.assert_called_once()
             moked_get_json.assert_called_once()
