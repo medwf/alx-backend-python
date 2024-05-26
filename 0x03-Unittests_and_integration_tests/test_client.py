@@ -75,7 +75,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ]
     )
     def test_has_license(
-            self, repo, license_key, expected) -> None:
+            self, repo: Dict, license_key: str, expected: bool) -> None:
         """this methods for testing has_license"""
         instance = GithubOrgClient("google")
         output = instance.has_license(repo, license_key)
