@@ -56,7 +56,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json',
            return_value=[{'name': 'abc'}, {'name': 'defg'}]
            )
-    def test_public_repos(self, moked_get_json: MagicMock) -> None:
+    def test_public_repos(self, moked_get_json) -> None:
         """tests the public repos method"""
         with patch(
                 "client.GithubOrgClient._public_repos_url",
