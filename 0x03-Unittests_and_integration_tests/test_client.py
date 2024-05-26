@@ -5,6 +5,7 @@ import unittest
 from typing import Dict
 from unittest.mock import (
     MagicMock,
+    Mock,
     patch,
     PropertyMock,
 )
@@ -22,17 +23,16 @@ class TestGithubOrgClient(unittest.TestCase):
     """
 
     @parameterized.expand([
-        ("google", {'login': "google"}),
-        ("abc", {'login': "abc"}),
+        ("google"),
+        ("abc"),
     ])
     @patch(
-        "client.get_json",
+        "client.get_json", return_value={"payload": True}
     )
-    def test_org(self, org: str, responce: Dict, moked: MagicMock) -> None:
+    def test_org(self, org: str, moked: Mock) -> None:
         """Tests the org method using Mock and parameterized"""
-        moked.return_value = MagicMock(return_value=responce)
         instance = GithubOrgClient(org)
-        self.assertEqual(instance.org(), responce)
+        self.assertEqual(instance.org, {"payload": True})
         moked.assert_called_once_with(
             "https://api.github.com/orgs/{}".format(org)
         )
