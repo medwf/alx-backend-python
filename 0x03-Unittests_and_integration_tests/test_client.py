@@ -48,9 +48,10 @@ class TestGithubOrgClient(unittest.TestCase):
                 "https://api.github.com/orgs/google/repos"
             )
 
-    @patch('client.get_json',
-           return_value=[{'name': 'abc'}, {'name': 'defg'}]
-           )
+    @patch(
+            'client.get_json',
+            return_value=[{'name': 'abc'}, {'name': 'defg'}]
+        )
     def test_public_repos(self, moked_get_json) -> None:
         """tests the public repos method"""
         with patch(
@@ -79,6 +80,7 @@ class TestGithubOrgClient(unittest.TestCase):
         instance = GithubOrgClient("google")
         output = instance.has_license(repo, license_key)
         self.assertEqual(output, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
