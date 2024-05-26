@@ -67,12 +67,15 @@ class TestGithubOrgClient(unittest.TestCase):
             mocked_public_repos_url.assert_called_once()
             moked_get_json.assert_called_once()
 
-    @parameterized.expand([
-        ({"license": {"key": "my_license"}}, "my_license", True),
-        ({"license": {"key": "other_license"}}, "my_license", False),
-    ])
+    @parameterized.expand(
+        [
+            ({"license": {"key": "my_license"}}, "my_license", True),
+            ({"license": {"key": "other_license"}}, "my_license", False),
+        ]
+    )
     def test_has_license(
-            self, repo: Dict, license_key: str, expected: bool) -> None:
+            self, repo, license_key, expected) -> None:
         """this methods for testing has_license"""
         instance = GithubOrgClient("google")
-        self.assertEqual(instance.has_license(repo, license_key), expected)
+        output = instance.has_license(repo, license_key)
+        self.assertEqual(output, expected)
