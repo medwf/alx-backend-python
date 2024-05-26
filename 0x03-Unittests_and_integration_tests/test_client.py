@@ -79,3 +79,6 @@ class TestGithubOrgClient(unittest.TestCase):
         instance = GithubOrgClient("google")
         output = instance.has_license(repo, license_key)
         self.assertEqual(output, expected)
+
+if __name__ == "__main__":
+    unittest.main()
